@@ -3,7 +3,7 @@
 Mockup statico per agriturismograppolidisole.it. Italiano per i testi visibili; codice e commit in inglese.
 
 - Stack: un solo `index.html` (HTML/CSS/JS vanilla inline). Nessuna libreria, nessun CDN, nessun Google Fonts.
-- Preview: `preview_start` con nome `grappoli-di-sole` (voce in `MHW/.claude/launch.json`, porta 5300).
+- Preview: `preview_start` con nome `grappoli-di-sole` (voce in `MHW/.claude/launch.json`, porta 5500).
 - Leggi prima `docs/SPEC.md` (direzione, token, contenuti) e `docs/PLAN.md`. `filemap.md` = indice dei file.
 
 Regole non ovvie

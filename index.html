@@ -30,6 +30,7 @@
   "email": "agriturismograppolidisole@gmail.com"
 }
 </script>
+<script>document.documentElement.classList.add('js')</script>
 <style>
 @font-face { font-family: 'Barlow Condensed'; src: url('assets/fonts/barlow-condensed-latin-700-normal.woff2') format('woff2'); font-weight: 700; font-style: normal; font-display: swap; }
 @font-face { font-family: 'Barlow Condensed'; src: url('assets/fonts/barlow-condensed-latin-700-italic.woff2') format('woff2'); font-weight: 700; font-style: italic; font-display: swap; }
@@ -116,33 +117,55 @@ a:hover { text-decoration-color: var(--uva); }
 .brand img { height: 40px; }
 .nav-desk, .header-cta { display: none; }
 .header-right { display: flex; align-items: center; gap: 0.75rem; }
-.menu summary {
-  list-style: none; cursor: pointer;
-  display: inline-flex; align-items: center; gap: 0.5rem;
+.menu-toggle, .menu-close {
+  display: none; cursor: pointer;
+  align-items: center; gap: 0.5rem;
   min-height: 44px; padding: 0.5rem 1.25rem;
-  border: 2px solid var(--uva); border-radius: 999px; font-weight: 600;
+  border: 2px solid var(--uva); border-radius: 999px; font: inherit; font-weight: 600;
+  background: transparent; color: var(--uva);
 }
-.menu summary::-webkit-details-marker { display: none; }
-.menu summary::after { content: "+"; font-size: 1.25rem; line-height: 1; }
-.menu[open] summary::after { content: "\2212"; }
-.menu-panel {
-  position: absolute; left: 0; right: 0; top: 100%;
-  background: var(--carta); border-bottom: 2px solid var(--uva);
-}
-.menu[open] .menu-panel { animation: drop 250ms var(--ease); }
-@keyframes drop { from { transform: translateY(-0.5rem); opacity: 0; } }
-.menu-panel a {
+.js .menu-toggle, .js .menu-close { display: inline-flex; }
+.menu-toggle::after { content: "+"; font-size: 1.25rem; line-height: 1; }
+.menu-close::after { content: "\2212"; font-size: 1.25rem; line-height: 1; }
+
+/* Drawer: slides in with a rounded bulge that flattens into a rectangle */
+.nav-drawer { background: var(--carta); padding: 1rem var(--g); border-bottom: 2px solid var(--uva); }
+.nav-drawer a {
   display: flex; align-items: center; min-height: 3.25rem;
-  padding: 0.5rem var(--g); border-top: 2px solid var(--salvia);
+  padding: 0.5rem 0; border-top: 2px solid var(--salvia);
   font-weight: 600; text-decoration: none;
 }
-.menu-panel a:hover { background: var(--salvia); }
+.nav-drawer a:hover { background: var(--salvia); }
+.nav-drawer .btn { margin-top: 1.5rem; border-top: 0; justify-content: center; }
+.js .nav-drawer {
+  position: fixed; top: 0; right: 0; z-index: 40;
+  width: min(100vw, 26rem); height: 100dvh;
+  display: flex; flex-direction: column; justify-content: space-between;
+  padding: 1.25rem var(--g) 2rem; border-bottom: 0;
+  visibility: hidden; transform: translateX(calc(100% + 100px));
+  transition: transform 500ms var(--ease), visibility 0s 500ms;
+}
+.js .nav-drawer.is-open { visibility: visible; transform: none; transition-delay: 0s; }
+.js .nav-drawer::before {
+  content: ""; position: absolute; top: 0; bottom: 0; left: -99px; width: 100px;
+  background: var(--carta); border-radius: 100% 0 0 100% / 50% 0 0 50%;
+  transform-origin: right; transition: transform 500ms var(--ease);
+}
+.js .nav-drawer.is-open::before { transform: scaleX(0); transition-duration: 700ms; }
+.js .nav-drawer .menu-close { align-self: flex-end; margin-bottom: 1.5rem; }
+.js .nav-drawer a:first-of-type { border-top: 2px solid var(--salvia); }
+.js body::after {
+  content: ""; position: fixed; inset: 0; z-index: 35;
+  background: oklch(26% 0.06 330 / 0.55); opacity: 0; visibility: hidden;
+  transition: opacity 500ms var(--ease), visibility 0s 500ms;
+}
+.js body.menu-open::after { opacity: 1; visibility: visible; transition-delay: 0s; }
 
 @media (min-width: 768px) {
   .header-cta { display: inline-flex; }
 }
 @media (min-width: 1024px) {
-  .menu { display: none; }
+  .js .menu-toggle, .nav-drawer, .js .nav-drawer, .js body::after { display: none; }
   .nav-desk { display: block; }
   .nav-desk ul { display: flex; gap: clamp(0.5rem, 1.5vw, 1.5rem); }
   .nav-desk a { display: inline-flex; align-items: center; min-height: 44px; padding-inline: 0.25rem; text-decoration-color: transparent; }
@@ -322,7 +345,7 @@ a:hover { text-decoration-color: var(--uva); }
 @media (min-width: 768px) { .bar { display: none; } }
 @media (prefers-reduced-motion: reduce) {
   .btn, .bar, .bar.is-off { transition: none; }
-  .menu[open] .menu-panel { animation: none; }
+  .js .nav-drawer, .js .nav-drawer::before, .js body::after { transition: none; }
 }
 </style>
 </head>
@@ -344,20 +367,23 @@ a:hover { text-decoration-color: var(--uva); }
     </nav>
     <div class="header-right">
       <a class="btn btn-uva header-cta" href="https://wa.me/393511700535?text=Ciao%2C%20vorrei%20prenotare%20da%20Grappoli%20di%20Sole.%20Giorno%2C%20orario%20e%20numero%20di%20persone%3A%20">Prenota</a>
-      <details class="menu">
-        <summary>Menu</summary>
-        <nav class="menu-panel" aria-label="Principale">
-          <a href="#storia">La Tenuta</a>
-          <a href="#cucina">La Tavola</a>
-          <a href="#menu">Menù</a>
-          <a href="#eventi">Eventi</a>
-          <a href="#esperienze">Natura</a>
-          <a href="#contatti">Contatti</a>
-        </nav>
-      </details>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav">Menu</button>
     </div>
   </div>
 </header>
+
+<nav class="nav-drawer" id="nav" aria-label="Menu principale">
+  <button class="menu-close" type="button">Chiudi</button>
+  <div class="nav-links">
+    <a href="#storia">La Tenuta</a>
+    <a href="#cucina">La Tavola</a>
+    <a href="#menu">Menù</a>
+    <a href="#eventi">Eventi</a>
+    <a href="#esperienze">Natura</a>
+    <a href="#contatti">Contatti</a>
+  </div>
+  <a class="btn btn-sole" href="https://wa.me/393511700535?text=Ciao%2C%20vorrei%20prenotare%20da%20Grappoli%20di%20Sole.%20Giorno%2C%20orario%20e%20numero%20di%20persone%3A%20">Prenota</a>
+</nav>
 
 <main id="contenuto">
 
@@ -581,12 +607,22 @@ if (today && today.querySelector('.slot:not(.slot-empty)')) {
   today.querySelector('.day-name').insertAdjacentHTML('beforeend', '<span class="tag-oggi">oggi</span>');
 }
 
-// Mobile menu: close after choosing a link or on Escape.
-const menu = document.querySelector('.menu');
-menu.addEventListener('click', e => { if (e.target.closest('a')) menu.open = false; });
-document.addEventListener('keydown', e => {
-  if (e.key === 'Escape' && menu.open) { menu.open = false; menu.querySelector('summary').focus(); }
+// Mobile menu drawer: close on link, close button, outside click or Escape.
+const nav = document.getElementById('nav');
+const toggle = document.querySelector('.menu-toggle');
+function setMenu(open) {
+  nav.classList.toggle('is-open', open);
+  document.body.classList.toggle('menu-open', open);
+  toggle.setAttribute('aria-expanded', String(open));
+  (open ? nav.querySelector('.menu-close') : toggle).focus({ preventScroll: true });
+}
+toggle.addEventListener('click', () => setMenu(true));
+nav.querySelector('.menu-close').addEventListener('click', () => setMenu(false));
+nav.addEventListener('click', e => { if (e.target.closest('.nav-links a, .btn')) setMenu(false); });
+document.addEventListener('click', e => {
+  if (nav.classList.contains('is-open') && !nav.contains(e.target) && !toggle.contains(e.target)) setMenu(false);
 });
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && nav.classList.contains('is-open')) setMenu(false); });
 
 // Mobile bar: hide while the hero or #contatti already show a Prenota button.
 const bar = document.querySelector('.bar');

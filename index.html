@@ -2,15 +2,603 @@
 <html lang="it">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Agriturismo Grappoli di Sole</title>
+<meta name="description" content="Vero agriturismo alle porte di Roma: orto, animali, vigna, cucina genuina e pernottamento su richiesta. Via Ardeatina 1943, 00134 Roma.">
+<meta name="theme-color" content="#F2B427">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="it_IT">
+<meta property="og:site_name" content="Agriturismo Grappoli di Sole">
+<meta property="og:title" content="Agriturismo Grappoli di Sole">
+<meta property="og:description" content="Vero agriturismo alle porte di Roma: orto, animali, vigna, cucina genuina e pernottamento su richiesta. Via Ardeatina 1943, 00134 Roma.">
+<link rel="icon" href="assets/brand/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="assets/fonts/barlow-condensed-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "Agriturismo Grappoli di Sole",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Via Ardeatina, 1943",
+    "postalCode": "00134",
+    "addressLocality": "Roma",
+    "addressRegion": "RM",
+    "addressCountry": "IT"
+  },
+  "telephone": "+39 346 661 3687",
+  "email": "agriturismograppolidisole@gmail.com"
+}
+</script>
 <style>
 @font-face { font-family: 'Barlow Condensed'; src: url('assets/fonts/barlow-condensed-latin-700-normal.woff2') format('woff2'); font-weight: 700; font-style: normal; font-display: swap; }
 @font-face { font-family: 'Barlow Condensed'; src: url('assets/fonts/barlow-condensed-latin-700-italic.woff2') format('woff2'); font-weight: 700; font-style: italic; font-display: swap; }
 @font-face { font-family: 'Lexend'; src: url('assets/fonts/lexend-latin-wght-normal.woff2') format('woff2'); font-weight: 100 900; font-style: normal; font-display: swap; }
+
+:root {
+  --carta: oklch(95.5% 0.025 110);
+  --sole: oklch(82% 0.17 85);
+  --uva: oklch(26% 0.06 330);
+  --oliva: oklch(45% 0.08 125);
+  --salvia: oklch(88% 0.04 120);
+  --display: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+  --text: 'Lexend', system-ui, sans-serif;
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --g: clamp(1rem, 4vw, 3rem);
+  --section: clamp(4rem, 10vw, 8rem);
+  --bar: 0px;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body {
+  margin: 0;
+  background: var(--carta);
+  color: var(--uva);
+  font: 400 1rem/1.6 var(--text);
+  padding-bottom: var(--bar);
+}
+img, svg { display: block; max-width: 100%; }
+h1, h2, h3, p, ul, ol, dl, dd, figure, blockquote { margin: 0; padding: 0; }
+ul, ol { list-style: none; }
+h1, h2, h3 { font-family: var(--display); font-weight: 700; line-height: 1; text-wrap: balance; }
+h1 { font-size: clamp(3.75rem, 15vw, 9.5rem); line-height: 0.95; }
+h2 { font-size: clamp(2.5rem, 8vw, 5rem); }
+h3 { font-size: 1.5rem; }
+em { font-style: italic; }
+h1 em, h2 em, h3 em, blockquote em { font-family: var(--display); }
+
+a { color: var(--uva); text-decoration-color: var(--oliva); text-decoration-thickness: 2px; text-underline-offset: 0.2em; }
+a:hover { text-decoration-color: var(--uva); }
+:focus-visible { outline: 3px solid var(--uva); outline-offset: 3px; }
+
+.wrap { width: min(100% - 2 * var(--g), 80rem); margin-inline: auto; }
+.section { padding-block: var(--section); }
+.vh { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; }
+
+.skip {
+  position: absolute; left: 1rem; top: 0.5rem; z-index: 30;
+  background: var(--carta); color: var(--uva); padding: 0.75rem 1rem; font-weight: 600;
+  border: 2px solid var(--uva);
+  transform: translateY(-200%);
+}
+.skip:focus { transform: none; }
+
+/* Buttons: the only pill shape */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-height: 3rem; padding: 0.625rem 1.75rem;
+  border-radius: 999px; border: 2px solid var(--uva);
+  font: 600 1.0625rem/1.2 var(--text); text-decoration: none; text-align: center;
+  transition: transform 200ms var(--ease);
+}
+.btn:hover { transform: translateY(-2px); }
+.btn:active { transform: translateY(0); }
+.btn-uva { background: var(--uva); color: var(--sole); }
+.btn-sole { background: var(--sole); color: var(--uva); }
+
+/* Botanical sprite icons */
+.bot { fill: none; stroke: currentColor; color: var(--oliva); }
+.divider { overflow: hidden; height: 16px; color: var(--oliva); }
+.divider svg { width: 1600px; max-width: none; height: 16px; }
+
+/* Photos: always a lunette, crop 4:5 */
+.lunette {
+  width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover;
+  border-radius: 999px 999px 0 0; background: var(--salvia);
+}
+
+/* 1. Header */
+.site-header { background: var(--sole); position: relative; z-index: 20; }
+.site-header .wrap { display: flex; align-items: center; justify-content: space-between; gap: 1rem; min-height: 4.5rem; }
+.brand { display: inline-flex; align-items: center; min-height: 44px; }
+.brand img { height: 40px; }
+.nav-desk, .header-cta { display: none; }
+.header-right { display: flex; align-items: center; gap: 0.75rem; }
+.menu summary {
+  list-style: none; cursor: pointer;
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  min-height: 44px; padding: 0.5rem 1.25rem;
+  border: 2px solid var(--uva); border-radius: 999px; font-weight: 600;
+}
+.menu summary::-webkit-details-marker { display: none; }
+.menu summary::after { content: "+"; font-size: 1.25rem; line-height: 1; }
+.menu[open] summary::after { content: "\2212"; }
+.menu-panel {
+  position: absolute; left: 0; right: 0; top: 100%;
+  background: var(--carta); border-bottom: 2px solid var(--uva);
+}
+.menu[open] .menu-panel { animation: drop 250ms var(--ease); }
+@keyframes drop { from { transform: translateY(-0.5rem); opacity: 0; } }
+.menu-panel a {
+  display: flex; align-items: center; min-height: 3.25rem;
+  padding: 0.5rem var(--g); border-top: 2px solid var(--salvia);
+  font-weight: 600; text-decoration: none;
+}
+.menu-panel a:hover { background: var(--salvia); }
+
+@media (min-width: 768px) {
+  .header-cta { display: inline-flex; }
+}
+@media (min-width: 1024px) {
+  .menu { display: none; }
+  .nav-desk { display: block; }
+  .nav-desk ul { display: flex; gap: clamp(0.5rem, 1.5vw, 1.5rem); }
+  .nav-desk a { display: inline-flex; align-items: center; min-height: 44px; padding-inline: 0.25rem; text-decoration-color: transparent; }
+  .nav-desk a:hover { text-decoration-color: var(--uva); }
+}
+
+/* 2. Hero: split asimmetrico drenched */
+.hero {
+  background: var(--sole);
+  border-bottom: 2px solid var(--uva);
+  min-height: calc(100dvh - 4.5rem);
+  display: flex; overflow-x: clip;
+}
+.hero .wrap { display: grid; gap: 2.5rem; align-content: space-between; padding-top: clamp(1.5rem, 5vw, 3rem); }
+.hero-text { display: grid; gap: 1.25rem; justify-items: start; }
+.hero-lead { font-size: 1.1875rem; max-width: 26ch; }
+.hero-visual { position: relative; width: 74%; align-self: end; margin-top: 3rem; }
+.hero-visual .lunette { position: relative; z-index: 1; }
+.hero-sun { position: absolute; z-index: 0; width: 70%; height: auto; top: -18%; right: -30%; }
+
+@media (min-width: 768px) {
+  .hero .wrap { grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr); align-items: end; align-content: stretch; gap: 3rem; padding-top: 3rem; }
+  .hero-text { align-self: center; padding-bottom: 3rem; }
+  .hero-lead { font-size: 1.375rem; }
+  .hero-visual { width: min(100%, calc((100dvh - 12rem) * 0.8)); justify-self: end; margin-top: 6rem; }
+  .hero-sun { width: 78%; top: -26%; right: -8%; }
+}
+@media (min-width: 768px) and (prefers-reduced-motion: no-preference) {
+  .hero-sun { animation: rise 400ms var(--ease) 150ms both; }
+}
+@keyframes rise { from { transform: translateY(30%); opacity: 0; } }
+
+/* 3. La Tenuta: tipografica + foto sfalsate */
+.tenuta .wrap { display: grid; gap: 3rem; }
+.tenuta-text { display: grid; gap: 1.75rem; align-content: start; }
+.tenuta blockquote {
+  font: 700 clamp(2rem, 6vw, 3.5rem)/1.02 var(--display);
+  padding-top: 1rem; border-top: 2px solid var(--uva);
+  max-width: 18ch; text-wrap: balance;
+}
+.tenuta-promise { font-size: 1.125rem; max-width: 34ch; }
+.tenuta-photos { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; align-items: start; }
+.tenuta-photos figure:nth-child(2) { margin-top: 5rem; }
+.tag {
+  display: inline-block; position: relative; z-index: 1;
+  margin: -1.25rem 0 0 0.75rem; padding: 0.25rem 0.75rem;
+  background: var(--carta); border: 2px solid var(--uva);
+  font-size: 0.875rem; font-weight: 600; line-height: 1.4;
+}
+.ph-ruota { object-position: 50% 70%; }
+.ph-asini { object-position: 50% 75%; }
+@media (min-width: 900px) {
+  .tenuta .wrap { grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: clamp(3rem, 6vw, 6rem); }
+  .tenuta-photos { gap: 2rem; }
+  .tenuta-photos figure:nth-child(2) { margin-top: 9rem; }
+  .tag { font-size: 1rem; }
+}
+
+/* 4. La Tavola: riga scroll-snap */
+.cucina { background: var(--salvia); }
+.cucina-head { display: grid; gap: 0.75rem; margin-bottom: 2.5rem; }
+.cucina-sub { font: italic 700 clamp(1.5rem, 4vw, 2.25rem)/1.05 var(--display); }
+.dishes {
+  display: flex; gap: 1rem;
+  overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-inline: var(--g);
+  margin-inline: calc(-1 * var(--g)); padding: 0 var(--g) 1rem;
+  scrollbar-color: var(--oliva) transparent;
+}
+.dish { scroll-snap-align: start; flex: 0 0 auto; display: grid; gap: 0.75rem; align-content: start; }
+.dish-pasta { width: 84%; }
+.dish-tagliere { width: 72%; }
+.dish-natura { width: 64%; }
+.dish p { max-width: 36ch; }
+.ph-pasta, .ph-tagliere { object-position: 50% 50%; }
+.dish-natura .sun-card {
+  background: var(--sole); color: var(--uva); border: 2px solid var(--uva);
+  aspect-ratio: 4 / 5; display: grid; align-content: space-between; padding: 1.5rem;
+}
+.dish-natura .bot { color: var(--uva); width: 4.5rem; height: auto; }
+.dish-natura h3 { font-size: clamp(2rem, 5vw, 2.5rem); }
+@media (min-width: 900px) {
+  .cucina-head { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: end; gap: 3rem; }
+  .dishes { display: grid; grid-template-columns: 5fr 4fr 3fr; gap: 2rem; align-items: end; overflow: visible; margin-inline: 0; padding: 0; }
+  .dish-pasta, .dish-tagliere, .dish-natura { width: auto; }
+}
+
+/* 5. Il calendario della tavola: griglia-calendario */
+.menu-head { display: grid; gap: 1rem; margin-bottom: 2.5rem; }
+.cal { display: grid; gap: 1.5rem; }
+.day { display: grid; gap: 0.5rem; }
+.day-name { display: flex; align-items: center; gap: 0.75rem; font-size: 1.75rem; }
+.slots { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; }
+.slot { border: 2px solid var(--uva); padding: 0.625rem 0.75rem; min-height: 5rem; display: grid; align-content: space-between; gap: 0.25rem; }
+.slot dt { font-size: 0.875rem; }
+.slot dd { font-weight: 600; line-height: 1.25; }
+.slot-full { background: var(--sole); }
+.slot-empty { border-style: dashed; border-color: var(--oliva); }
+.is-today { outline: 0.5rem solid var(--salvia); background: var(--salvia); }
+.tag-oggi { background: var(--uva); color: var(--carta); font: 600 0.875rem/1 var(--text); padding: 0.375rem 0.5rem; }
+.legend { display: flex; align-items: center; gap: 0.75rem; margin-top: 1.5rem; font-size: 0.9375rem; }
+.legend .swatch { flex: none; width: 2rem; height: 1.25rem; border: 2px dashed var(--oliva); }
+@media (min-width: 768px) {
+  .cal { grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 0.75rem; }
+  .slots { grid-template-columns: 1fr; }
+  .slot { min-height: 6.5rem; }
+}
+
+.prices { display: grid; gap: 1.5rem; margin-top: clamp(3rem, 6vw, 4.5rem); align-items: start; }
+.label { border: 2px solid var(--uva); padding: 1.25rem; display: grid; gap: 1rem; background: var(--carta); }
+.label h3 { font-size: 1.5rem; }
+.label dl { display: grid; gap: 0.5rem; }
+.row { display: flex; align-items: baseline; gap: 0.5rem; }
+.row dt { flex: 1; display: flex; align-items: baseline; gap: 0.5rem; }
+.row dt::after { content: ""; flex: 1; min-width: 1.5rem; border-bottom: 2px dotted var(--oliva); }
+.row dd { font-weight: 600; white-space: nowrap; }
+.label-full { background: var(--sole); }
+.label-full p { font-size: 0.9375rem; }
+.menu-foot { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem 1.5rem; margin-top: 2.5rem; }
+.menu-foot p { font-weight: 600; font-size: 1.125rem; }
+@media (min-width: 900px) {
+  .prices { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2rem; }
+}
+
+/* 6. Eventi: banda sole piena, lista tipografica */
+.eventi { background: var(--sole); border-block: 2px solid var(--uva); }
+.eventi .wrap { display: grid; gap: 2.5rem; justify-items: start; }
+.occasioni { font: 700 clamp(1.75rem, 6vw, 4rem)/1.08 var(--display); max-width: 22ch; }
+.occasioni li { display: inline; }
+.occasioni li:nth-child(even) { font-style: italic; }
+.occasioni li:not(:last-child)::after { content: ", "; font-style: normal; }
+.occasioni li:last-child::after { content: "."; }
+
+/* 7. Natura: foto + lista a sentiero */
+.natura { background: var(--salvia); }
+.natura .wrap { display: grid; gap: 2.5rem; }
+.natura figure { width: 82%; }
+.ph-alpaca { object-position: 50% 70%; }
+.sentiero { border-left: 2px solid var(--oliva); display: grid; gap: 2rem; padding-block: 0.5rem; margin-top: 2rem; }
+.sentiero li { position: relative; padding-left: 1.75rem; font: 700 clamp(1.75rem, 4vw, 2.441rem)/1.05 var(--display); }
+.sentiero li::before { content: ""; position: absolute; left: -9px; top: 0.3em; width: 16px; height: 16px; background: var(--oliva); }
+@media (min-width: 900px) {
+  .natura .wrap { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(3rem, 6vw, 6rem); align-items: center; }
+  .natura figure { width: 100%; }
+}
+
+/* 8. Contatti + footer: indirizzo-timbro */
+.contatti .wrap { display: grid; gap: 2.5rem; }
+.contatti h2 { margin-top: 2.5rem; }
+.stamp { border: 2px solid var(--uva); padding: 1.5rem; display: grid; gap: 1rem; justify-items: start; font-style: normal; max-width: 26rem; transform: rotate(-1.5deg); }
+.stamp img { width: 5.5rem; height: 5.5rem; }
+.stamp-name { font: 700 2rem/1 var(--display); }
+.stamp-addr { font-size: 1.125rem; }
+.contact-list { display: grid; gap: 0.25rem; margin-top: 1.5rem; }
+.contact-list li { display: grid; }
+.contact-list span { font-size: 0.875rem; }
+.contact-list a { display: inline-flex; align-items: center; min-height: 44px; font-weight: 600; font-size: 1.125rem; overflow-wrap: anywhere; }
+@media (min-width: 900px) {
+  .contatti .wrap { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: start; gap: 4rem; }
+  .contatti .divider, .contatti h2 { grid-column: 1 / -1; }
+  .contatti h2 { margin-top: 1rem; }
+}
+.site-footer { border-top: 2px solid var(--uva); padding-block: 1.5rem; font-size: 0.875rem; }
+.site-footer ul { display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; }
+
+/* 9. Barra fissa mobile */
+.bar {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 15;
+  background: var(--carta); border-top: 2px solid var(--uva);
+  padding: 0.5rem var(--g) calc(0.5rem + env(safe-area-inset-bottom, 0px));
+  transition: transform 300ms var(--ease);
+}
+.bar .btn { width: 100%; }
+.bar.is-off { transform: translateY(110%); visibility: hidden; transition: transform 300ms var(--ease), visibility 0s 300ms; }
+@media (max-width: 767.98px) {
+  :root { --bar: calc(4.25rem + env(safe-area-inset-bottom, 0px)); }
+}
+@media (min-width: 768px) { .bar { display: none; } }
+@media (prefers-reduced-motion: reduce) {
+  .btn, .bar, .bar.is-off { transition: none; }
+  .menu[open] .menu-panel { animation: none; }
+}
 </style>
 </head>
 <body>
-<h1>Grappoli di Sole</h1>
+<a class="skip" href="#contenuto">Salta al contenuto</a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="./"><img src="assets/brand/wordmark.svg" alt="Grappoli di Sole" width="176" height="40"></a>
+    <nav class="nav-desk" aria-label="Principale">
+      <ul>
+        <li><a href="#storia">La Tenuta</a></li>
+        <li><a href="#cucina">La Tavola</a></li>
+        <li><a href="#menu">Menù</a></li>
+        <li><a href="#eventi">Eventi</a></li>
+        <li><a href="#esperienze">Natura</a></li>
+        <li><a href="#contatti">Contatti</a></li>
+      </ul>
+    </nav>
+    <div class="header-right">
+      <a class="btn btn-uva header-cta" href="https://wa.me/393511700535?text=Ciao%2C%20vorrei%20prenotare%20da%20Grappoli%20di%20Sole.%20Giorno%2C%20orario%20e%20numero%20di%20persone%3A%20">Prenota</a>
+      <details class="menu">
+        <summary>Menu</summary>
+        <nav class="menu-panel" aria-label="Principale">
+          <a href="#storia">La Tenuta</a>
+          <a href="#cucina">La Tavola</a>
+          <a href="#menu">Menù</a>
+          <a href="#eventi">Eventi</a>
+          <a href="#esperienze">Natura</a>
+          <a href="#contatti">Contatti</a>
+        </nav>
+      </details>
+    </div>
+  </div>
+</header>
+
+<main id="contenuto">
+
+  <section class="hero" aria-labelledby="titolo">
+    <div class="wrap">
+      <div class="hero-text">
+        <h1 id="titolo">Il ritmo dolce della <em>terra</em>.</h1>
+        <p class="hero-lead">Un vero agriturismo a due passi dal caos di Roma.</p>
+        <a class="btn btn-uva" href="https://wa.me/393511700535?text=Ciao%2C%20vorrei%20prenotare%20da%20Grappoli%20di%20Sole.%20Giorno%2C%20orario%20e%20numero%20di%20persone%3A%20">Prenota</a>
+      </div>
+      <div class="hero-visual">
+        <img class="hero-sun" src="assets/brand/emblem.svg" alt="" width="200" height="200">
+        <img class="lunette" src="https://agriturismograppolidisole.it/__l5e/assets-v1/73a80832-ba64-490b-afd2-0e4f1afb036d/DSC04565.jpg" alt="Uliveto e vigna dell'agriturismo Grappoli di Sole alle porte di Roma" width="1280" height="1920" fetchpriority="high">
+      </div>
+    </div>
+  </section>
+
+  <section class="section tenuta" id="storia" aria-labelledby="t-storia">
+    <div class="wrap">
+      <div class="tenuta-text">
+        <div class="divider" aria-hidden="true"><svg class="bot" viewBox="0 0 1600 16" width="1600" height="16"><use href="assets/brand/botanical.svg#divider" x="0" width="160" height="16"/><use href="assets/brand/botanical.svg#divider" x="160" width="160" height="16"/><use href="assets/brand/botanical.svg#divider" x="320" width="160" height="16"/><use href="assets/brand/botanical.svg#divider" x="480" width="160" height="16"/><use href="assets/brand/botanical.svg#divider" x="640" width="160" height="16"/><use href="assets/brand/botanical.svg#divider" x="800" width="160" height="16"/><use href="assets/brand/botanical.svg#divider" x="960" width="160" height="16"/><use href="assets/brand/botanical.svg#divider" x="1120" width="160" height="16"/><use href="assets/brand/botanical.svg#divider" x="1280" width="160" height="16"/><use href="assets/brand/botanical.svg#divider" x="1440" width="160" height="16"/></svg></div>
+        <h2 id="t-storia">Oltre la città, dentro la natura <em>più vera</em>.</h2>
+        <blockquote><p>C'è un'onestà profonda nel veder crescere ciò che si mangia.</p></blockquote>
+        <p class="tenuta-promise">Grappoli di Sole: il nome è già una promessa.</p>
+      </div>
+      <div class="tenuta-photos">
+        <figure>
+          <img class="lunette ph-ruota" src="https://agriturismograppolidisole.it/__l5e/assets-v1/f42a02db-187f-46cb-a683-810303b9a60d/DSC04562.jpg" alt="Filari della vigna in autunno con vecchia ruota di carro" width="1280" height="1920" loading="lazy" decoding="async">
+          <figcaption class="tag">Filari in autunno</figcaption>
+        </figure>
+        <figure>
+          <img class="lunette ph-asini" src="https://agriturismograppolidisole.it/__l5e/assets-v1/cd9e5bed-2d5d-41d3-8606-632da7f57924/DSC00085.jpg" alt="Asini al pascolo nel prato dell'agriturismo" width="1280" height="1920" loading="lazy" decoding="async">
+          <figcaption class="tag">Gli asini al pascolo</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="section cucina" id="cucina" aria-labelledby="t-cucina">
+    <div class="wrap">
+      <div class="cucina-head">
+        <h2 id="t-cucina">Ingredienti a metro zero.</h2>
+        <p class="cucina-sub">Ricette tramandate, fuoco vivo.</p>
+      </div>
+      <div class="dishes" tabindex="0" role="region" aria-label="Le proposte della tavola">
+        <article class="dish dish-pasta">
+          <img class="lunette ph-pasta" src="https://agriturismograppolidisole.it/__l5e/assets-v1/a2c9f2d5-daec-43ab-b965-89693a907d87/DSC00075.jpg" alt="Pasta fresca fatta a mano con crema di zucchine e zucchine croccanti" width="1280" height="1920" loading="lazy" decoding="async">
+          <h3>Primi e Secondi da acquolina di bocca</h3>
+          <p>Tonnarelli, strozzapreti e gnocchi preparati ogni mattina con le verdure dell'orto.</p>
+        </article>
+        <article class="dish dish-tagliere">
+          <img class="lunette ph-tagliere" src="https://agriturismograppolidisole.it/__l5e/assets-v1/ca5425a9-39dc-4e51-8d52-24a48f1e30b6/DSC00059.jpg" alt="Tagliere di salumi, prosciutto e polpette della casa" width="1280" height="1920" loading="lazy" decoding="async">
+          <h3>Taglieri ricchi e con prodotti locali</h3>
+          <p>Salumi e formaggi dell'agro romano, composte e fritti di stagione.</p>
+        </article>
+        <article class="dish dish-natura">
+          <div class="sun-card">
+            <svg class="bot" viewBox="0 0 64 96" width="64" height="96" aria-hidden="true"><use href="assets/brand/botanical.svg#grape" width="64" height="96"/></svg>
+            <h3>Dalla natura al <em>piatto</em></h3>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section calendario" id="menu" aria-labelledby="t-menu">
+    <div class="wrap">
+      <div class="menu-head">
+        <h2 id="t-menu">Il calendario della <em>tavola</em></h2>
+      </div>
+
+      <ul class="cal">
+        <li class="day" data-day="3">
+          <h3 class="day-name">Mercoledì</h3>
+          <dl class="slots">
+            <div class="slot"><dt>Pranzo</dt><dd>Menù pranzo</dd></div>
+            <div class="slot slot-empty"><dt>Cena</dt><dd><span class="vh">da confermare</span></dd></div>
+          </dl>
+        </li>
+        <li class="day" data-day="4">
+          <h3 class="day-name">Giovedì</h3>
+          <dl class="slots">
+            <div class="slot"><dt>Pranzo</dt><dd>Menù pranzo</dd></div>
+            <div class="slot slot-empty"><dt>Cena</dt><dd><span class="vh">da confermare</span></dd></div>
+          </dl>
+        </li>
+        <li class="day" data-day="5">
+          <h3 class="day-name">Venerdì</h3>
+          <dl class="slots">
+            <div class="slot"><dt>Pranzo</dt><dd>Menù pranzo</dd></div>
+            <div class="slot slot-full"><dt>Cena</dt><dd>Menù Completo</dd></div>
+          </dl>
+        </li>
+        <li class="day" data-day="6">
+          <h3 class="day-name">Sabato</h3>
+          <dl class="slots">
+            <div class="slot slot-full"><dt>Pranzo</dt><dd>Menù Completo</dd></div>
+            <div class="slot slot-full"><dt>Cena</dt><dd>Menù Completo</dd></div>
+          </dl>
+        </li>
+        <li class="day" data-day="0">
+          <h3 class="day-name">Domenica</h3>
+          <dl class="slots">
+            <div class="slot slot-full"><dt>Pranzo</dt><dd>Menù Completo</dd></div>
+            <div class="slot slot-empty"><dt>Cena</dt><dd><span class="vh">da confermare</span></dd></div>
+          </dl>
+        </li>
+      </ul>
+      <p class="legend"><span class="swatch" aria-hidden="true"></span><span>Altri giorni e orari: [ORARI DI APERTURA DA CONFERMARE]</span></p>
+
+      <div class="prices">
+        <section class="label" aria-labelledby="p-pranzo">
+          <h3 id="p-pranzo">Menù pranzo</h3>
+          <p>Mer-ven, pranzo</p>
+          <dl>
+            <div class="row"><dt>Insalatona</dt><dd>€10</dd></div>
+            <div class="row"><dt>Primo</dt><dd>€12</dd></div>
+            <div class="row"><dt>Antipasto e Primo</dt><dd>€15</dd></div>
+            <div class="row"><dt>Antipasto e Secondo</dt><dd>€17</dd></div>
+          </dl>
+        </section>
+        <section class="label label-full" aria-labelledby="p-completo">
+          <h3 id="p-completo">Menù Completo</h3>
+          <p>Ven sera, sab pranzo e cena, dom pranzo</p>
+          <dl>
+            <div class="row"><dt>A persona</dt><dd>€30,00</dd></div>
+          </dl>
+          <p>3 antipasti, scelta tra 3 primi, secondo con contorno, acqua, vino della casa in ragione di una bottiglia ogni 5 persone, dolce della casa.</p>
+        </section>
+        <section class="label" aria-labelledby="p-bambini">
+          <h3 id="p-bambini">Bambini</h3>
+          <dl>
+            <div class="row"><dt>Un primo o un secondo, acqua</dt><dd>€12,00</dd></div>
+            <div class="row"><dt>Primo + secondo, bibita</dt><dd>€15,00</dd></div>
+          </dl>
+        </section>
+      </div>
+
+      <div class="menu-foot">
+        <p>Prenotazione consigliata.</p>
+        <a class="btn btn-sole" href="https://wa.me/393511700535?text=Ciao%2C%20vorrei%20prenotare%20da%20Grappoli%20di%20Sole.%20Giorno%2C%20orario%20e%20numero%20di%20persone%3A%20">Prenota</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section eventi" id="eventi" aria-labelledby="t-eventi">
+    <div class="wrap">
+      <h2 id="t-eventi">Organizza il tuo evento <em>privato</em>.</h2>
+      <ul class="occasioni">
+        <li>Comunioni e cresime</li>
+        <li>battesimi</li>
+        <li>anniversari</li>
+        <li>compleanni</li>
+        <li>pranzi e cene di famiglia</li>
+        <li>formule su misura</li>
+      </ul>
+      <a class="btn btn-uva" href="https://wa.me/393511700535?text=Ciao%2C%20vorrei%20un%20preventivo%20per%20un%20evento%20privato%20da%20Grappoli%20di%20Sole.%20Tipo%20di%20evento%20e%20numero%20di%20persone%3A%20">Richiedi un preventivo</a>
+    </div>
+  </section>
+
+  <section class="section natura" id="esperienze" aria-labelledby="t-natura">
+    <div class="wrap">
+      <figure>
+        <img class="lunette ph-alpaca" src="https://agriturismograppolidisole.it/__l5e/assets-v1/63b88f29-3490-43ef-9656-5a90d8cb286d/DSC04512.jpg" alt="Alpaca tra i filari della vigna al tramonto" width="1280" height="1920" loading="lazy" decoding="async">
+      </figure>
+      <div>
+        <h2 id="t-natura">Incontri <em>inaspettati</em>.</h2>
+        <ul class="sentiero">
+          <li>Visita a orto, uliveto e vigna</li>
+          <li>Incontro con gli animali della fattoria, tra cui alpaca</li>
+          <li>Pernottamento su richiesta</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section contatti" id="contatti" aria-labelledby="t-contatti">
+    <div class="wrap">
+      <div class="divider" aria-hidden="true"><svg class="bot" viewBox="0 0 1600 16" width="1600" height="16"><use href="assets/brand/botanical.svg#divider" x="0" width="160" height="16"/><use href="assets/brand/botanical.svg#divider" x="160" width="160" height="16"/><use href="assets/brand/botanical.svg#divider" x="320" width="160" height="16"/><use href="assets/brand/botanical.svg#divider" x="480" width="160" height="16"/><use href="assets/brand/botanical.svg#divider" x="640" width="160" height="16"/><use href="assets/brand/botanical.svg#divider" x="800" width="160" height="16"/><use href="assets/brand/botanical.svg#divider" x="960" width="160" height="16"/><use href="assets/brand/botanical.svg#divider" x="1120" width="160" height="16"/><use href="assets/brand/botanical.svg#divider" x="1280" width="160" height="16"/><use href="assets/brand/botanical.svg#divider" x="1440" width="160" height="16"/></svg></div>
+      <h2 id="t-contatti">Contatti</h2>
+      <address class="stamp">
+        <img src="assets/brand/emblem.svg" alt="" width="200" height="200" loading="lazy">
+        <p class="stamp-name">Agriturismo Grappoli di Sole</p>
+        <p class="stamp-addr">Via Ardeatina, 1943<br>00134 Roma RM</p>
+        <p>Disponibilità alloggio su richiesta</p>
+      </address>
+      <div>
+        <a class="btn btn-sole" href="https://wa.me/393511700535?text=Ciao%2C%20vorrei%20prenotare%20da%20Grappoli%20di%20Sole.%20Giorno%2C%20orario%20e%20numero%20di%20persone%3A%20">Prenota</a>
+        <ul class="contact-list">
+          <li><span>Telefono</span><a href="tel:+393466613687">346 661 3687</a></li>
+          <li><span>WhatsApp</span><a href="https://wa.me/393511700535?text=Ciao%2C%20vorrei%20prenotare%20da%20Grappoli%20di%20Sole.%20Giorno%2C%20orario%20e%20numero%20di%20persone%3A%20">+39 351 170 0535</a></li>
+          <li><span>Email</span><a href="mailto:agriturismograppolidisole@gmail.com">agriturismograppolidisole@<wbr>gmail.com</a></li>
+          <li><span>Indirizzo</span><a href="https://www.google.com/maps/search/?api=1&amp;query=Via+Ardeatina+1943+00134+Roma" target="_blank" rel="noopener">Trova la strada</a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <ul>
+      <li>P.IVA 18014771002</li>
+      <li>© 2026 Grappoli di Sole</li>
+      <li>[PRIVACY POLICY DEL CLIENTE QUI]</li>
+      <li>[COOKIE POLICY DEL CLIENTE QUI]</li>
+    </ul>
+  </div>
+</footer>
+
+<div class="bar">
+  <a class="btn btn-uva" href="https://wa.me/393511700535?text=Ciao%2C%20vorrei%20prenotare%20da%20Grappoli%20di%20Sole.%20Giorno%2C%20orario%20e%20numero%20di%20persone%3A%20">Prenota</a>
+</div>
+
+<script>
+// Calendar: mark today only when it has data; never says open or closed.
+const today = document.querySelector('.day[data-day="' + new Date().getDay() + '"]');
+if (today && today.querySelector('.slot:not(.slot-empty)')) {
+  today.classList.add('is-today');
+  today.querySelector('.day-name').insertAdjacentHTML('beforeend', '<span class="tag-oggi">oggi</span>');
+}
+
+// Mobile menu: close after choosing a link or on Escape.
+const menu = document.querySelector('.menu');
+menu.addEventListener('click', e => { if (e.target.closest('a')) menu.open = false; });
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape' && menu.open) { menu.open = false; menu.querySelector('summary').focus(); }
+});
+
+// Mobile bar: hide while the hero or #contatti already show a Prenota button.
+const bar = document.querySelector('.bar');
+if ('IntersectionObserver' in window) {
+  const seen = new Set();
+  const io = new IntersectionObserver(es => {
+    es.forEach(e => e.isIntersecting ? seen.add(e.target) : seen.delete(e.target));
+    bar.classList.toggle('is-off', seen.size > 0);
+  });
+  io.observe(document.querySelector('.hero .btn'));
+  io.observe(document.getElementById('contatti'));
+}
+</script>
 </body>
 </html>
